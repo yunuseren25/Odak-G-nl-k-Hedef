@@ -16,6 +16,7 @@
       --accent-soft: rgba(217, 155, 67, 0.14);
       --accent-hover: #c48834;
       --ok: #4ea878;
+      --ok-soft: rgba(78, 168, 120, 0.14);
       --danger: #cf5c5c;
     }
 
@@ -33,16 +34,16 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 28px 16px;
+      padding: 24px 14px 40px;
       line-height: 1.45;
     }
 
     .container {
       width: 100%;
-      max-width: 500px;
+      max-width: 560px;
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 16px;
     }
 
     header {
@@ -51,6 +52,8 @@
       align-items: center;
       padding-bottom: 12px;
       border-bottom: 1px solid var(--border);
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .brand {
@@ -74,37 +77,110 @@
     .stats-row {
       display: flex;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
     .stat-pill {
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 6px 11px;
+      padding: 6px 10px;
       border-radius: 10px;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--muted);
       text-align: right;
     }
 
     .stat-pill strong {
       display: block;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       color: var(--text);
       font-variant-numeric: tabular-nums;
+    }
+
+    .nav-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      background: var(--surface);
+      padding: 6px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .nav-tab {
+      padding: 8px 6px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.15s, color 0.15s;
+      text-align: center;
+    }
+
+    .nav-tab:hover {
+      color: var(--text);
+    }
+
+    .nav-tab.active {
+      background: var(--surface-elevated);
+      color: var(--accent);
+      border: 1px solid var(--border);
+    }
+
+    .tab-panel {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .tab-panel.active {
+      display: flex;
     }
 
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 22px;
+      padding: 20px;
+    }
+
+    .alert-banner {
+      background: var(--surface-elevated);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .alert-banner.visible {
+      display: flex;
+    }
+
+    .alert-title {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .alert-msg {
+      font-size: 0.88rem;
+      color: var(--text);
+      margin-top: 2px;
     }
 
     .mode-buttons {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .mode-btn {
@@ -114,7 +190,7 @@
       background: var(--bg);
       color: var(--muted);
       font-weight: 600;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       cursor: pointer;
       transition: background-color 0.15s, border-color 0.15s, color 0.15s;
     }
@@ -146,7 +222,7 @@
 
     .active-focus-label {
       color: var(--muted);
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
       letter-spacing: 0.6px;
     }
@@ -158,28 +234,28 @@
       word-break: break-word;
     }
 
-    .clear-focus-btn {
+    .small-btn {
       background: transparent;
       border: 1px solid var(--border);
       color: var(--muted);
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       padding: 4px 8px;
       border-radius: 6px;
       cursor: pointer;
       flex-shrink: 0;
     }
 
-    .clear-focus-btn:hover {
+    .small-btn:hover {
       color: var(--text);
       border-color: #3a4254;
     }
 
     .timer-display {
-      font-size: 4rem;
+      font-size: 3.9rem;
       font-weight: 700;
       text-align: center;
       letter-spacing: 2px;
-      margin: 10px 0 20px;
+      margin: 8px 0 18px;
       font-variant-numeric: tabular-nums;
       color: var(--text);
     }
@@ -216,7 +292,6 @@
       font-weight: 600;
       font-size: 0.9rem;
       cursor: pointer;
-      transition: border-color 0.15s;
     }
 
     .btn-secondary:hover {
@@ -226,27 +301,31 @@
     .custom-time {
       display: flex;
       gap: 8px;
-      margin-top: 16px;
-      padding-top: 16px;
+      margin-top: 14px;
+      padding-top: 14px;
       border-top: 1px solid var(--border);
     }
 
-    .custom-time input,
-    .task-input-row input {
+    input, select, textarea {
       width: 100%;
       padding: 10px 12px;
       border-radius: 8px;
       border: 1px solid var(--border);
       background: var(--bg);
       color: var(--text);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       outline: none;
       transition: border-color 0.15s;
     }
 
-    .custom-time input:focus,
-    .task-input-row input:focus {
+    input:focus, select:focus, textarea:focus {
       border-color: var(--accent);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.5;
     }
 
     .btn-ghost-accent {
@@ -256,7 +335,7 @@
       background: var(--bg);
       color: var(--accent);
       font-weight: 600;
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       cursor: pointer;
       white-space: nowrap;
     }
@@ -270,8 +349,8 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 14px;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
     .section-title {
@@ -281,16 +360,44 @@
     }
 
     .section-sub {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--muted);
       margin-top: 2px;
+    }
+
+    .progress-wrap {
+      margin-bottom: 14px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 7px;
+      background: var(--bg);
+      border-radius: 99px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--ok);
+      transition: width 0.25s ease;
     }
 
     .reset-day-btn {
       background: transparent;
       border: 1px solid var(--border);
       color: var(--muted);
-      font-size: 0.76rem;
+      font-size: 0.75rem;
       padding: 5px 9px;
       border-radius: 7px;
       cursor: pointer;
@@ -303,19 +410,20 @@
     }
 
     .task-input-row {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 78px auto;
       gap: 8px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
-    .task-list {
+    .item-list {
       list-style: none;
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
 
-    .task-item {
+    .list-card {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -326,7 +434,7 @@
       gap: 8px;
     }
 
-    .task-item.is-active-target {
+    .list-card.is-active-target {
       border-color: var(--accent);
       background: var(--surface-elevated);
     }
@@ -354,22 +462,28 @@
       font-weight: 700;
     }
 
-    .task-item.done .check-box {
+    .list-card.done .check-box {
       background: var(--ok);
       border-color: var(--ok);
     }
 
-    .task-text {
-      font-size: 0.9rem;
+    .task-title {
+      font-size: 0.88rem;
       word-break: break-word;
     }
 
-    .task-item.done .task-text {
+    .task-meta {
+      font-size: 0.74rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .list-card.done .task-title {
       text-decoration: line-through;
       color: var(--muted);
     }
 
-    .task-actions {
+    .card-actions {
       display: flex;
       align-items: center;
       gap: 6px;
@@ -380,7 +494,7 @@
       background: transparent;
       border: 1px solid var(--border);
       color: var(--muted);
-      font-size: 0.74rem;
+      font-size: 0.73rem;
       padding: 3px 7px;
       border-radius: 6px;
       cursor: pointer;
@@ -406,9 +520,138 @@
       color: var(--danger);
     }
 
+    .ritual-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ritual-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 11px;
+      border-radius: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      font-size: 0.84rem;
+      cursor: pointer;
+    }
+
+    .ritual-item.checked {
+      border-color: rgba(78, 168, 120, 0.45);
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    .rating-box {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .rating-box.visible {
+      display: flex;
+    }
+
+    .rating-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+
+    .rate-btn {
+      padding: 8px 0;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.86rem;
+      cursor: pointer;
+    }
+
+    .rate-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .day-selector {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      margin-bottom: 14px;
+    }
+
+    .day-btn {
+      padding: 8px 2px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .day-btn.active {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .schedule-form {
+      display: grid;
+      grid-template-columns: 92px 1fr auto;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .reminder-form {
+      display: grid;
+      grid-template-columns: 1fr 96px auto;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .reminder-subrow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .badge-time {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .status-note {
+      font-size: 0.76rem;
+      color: var(--ok);
+      min-height: 18px;
+      margin-top: 6px;
+    }
+
     footer {
       text-align: center;
-      font-size: 0.76rem;
+      font-size: 0.75rem;
       color: var(--muted);
       padding-top: 4px;
     }
@@ -419,7 +662,7 @@
     <header>
       <div class="brand">
         <div class="logo">ODAK</div>
-        <div class="brand-sub">Sade çalışma &amp; tempo alanı</div>
+        <div class="brand-sub">Çalışma programı, hatırlatıcı &amp; tempo</div>
       </div>
       <div class="stats-row">
         <div class="stat-pill">
@@ -430,86 +673,294 @@
           <span>Tur</span>
           <strong id="sessionCount">0</strong>
         </div>
+        <div class="stat-pill">
+          <span>Puan Ort.</span>
+          <strong id="avgRating">-</strong>
+        </div>
       </div>
     </header>
 
-    <div class="card">
-      <div class="mode-buttons">
-        <button class="mode-btn active" onclick="setMode(25, 'focus', this)">Odak (25 dk)</button>
-        <button class="mode-btn" onclick="setMode(5, 'break', this)">Kısa Mola (5 dk)</button>
-        <button class="mode-btn" onclick="setMode(15, 'break', this)">Uzun Mola (15 dk)</button>
+    <div class="alert-banner" id="reminderAlertBanner">
+      <div>
+        <div class="alert-title">Hatırlatıcı Zamanı</div>
+        <div class="alert-msg" id="reminderAlertText"></div>
       </div>
+      <button class="small-btn" onclick="dismissReminderAlert()">Kapat</button>
+    </div>
 
-      <div class="active-focus-banner" id="activeFocusBanner">
-        <div>
-          <div class="active-focus-label">Şu anki hedef</div>
-          <div class="active-focus-text" id="activeFocusText">Seçilmedi — listeden bir hedefe "Odakla" bas</div>
+    <nav class="nav-tabs">
+      <button class="nav-tab active" onclick="switchTab('focusTab', this)">Odak</button>
+      <button class="nav-tab" onclick="switchTab('scheduleTab', this)">Program</button>
+      <button class="nav-tab" onclick="switchTab('remindersTab', this)">Hatırlatıcı</button>
+      <button class="nav-tab" onclick="switchTab('notesTab', this)">Not &amp; Yedek</button>
+    </nav>
+
+    <!-- SEKME 1: ODAK VE HEDEFLER -->
+    <div class="tab-panel active" id="focusTab">
+      <div class="card">
+        <div class="mode-buttons">
+          <button class="mode-btn active" onclick="setMode(25, 'focus', this)">Odak (25 dk)</button>
+          <button class="mode-btn" onclick="setMode(5, 'break', this)">Kısa Mola (5 dk)</button>
+          <button class="mode-btn" onclick="setMode(15, 'break', this)">Uzun Mola (15 dk)</button>
         </div>
-        <button class="clear-focus-btn" id="clearFocusBtn" onclick="clearActiveTask()" style="display: none;">Temizle</button>
+
+        <div class="active-focus-banner">
+          <div>
+            <div class="active-focus-label">Şu anki hedef</div>
+            <div class="active-focus-text" id="activeFocusText">Seçilmedi — listeden bir hedefe "Odakla" bas</div>
+          </div>
+          <button class="small-btn" id="clearFocusBtn" onclick="clearActiveTask()" style="display: none;">Temizle</button>
+        </div>
+
+        <div class="timer-display" id="timer">25:00</div>
+
+        <div class="controls">
+          <button class="btn-main" id="startBtn" onclick="toggleTimer()">Başlat</button>
+          <button class="btn-secondary" onclick="resetTimer()">Sıfırla</button>
+        </div>
+
+        <div class="custom-time">
+          <input type="number" id="customMinutes" placeholder="Özel süre (dk, örn: 40)" min="1" max="180">
+          <button class="btn-ghost-accent" onclick="applyCustomTime()">Uygula</button>
+        </div>
+
+        <div class="rating-box" id="ratingBox">
+          <div class="section-sub" style="margin: 0;">Tur bitti. Bu odak seansına kaç puan veriyorsun? (1 = Dağınık, 5 = Tam Odak)</div>
+          <div class="rating-buttons">
+            <button class="rate-btn" onclick="saveRating(1)">1</button>
+            <button class="rate-btn" onclick="saveRating(2)">2</button>
+            <button class="rate-btn" onclick="saveRating(3)">3</button>
+            <button class="rate-btn" onclick="saveRating(4)">4</button>
+            <button class="rate-btn" onclick="saveRating(5)">5</button>
+          </div>
+        </div>
       </div>
 
-      <div class="timer-display" id="timer">25:00</div>
+      <div class="card">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Günün En Önemli 3 Hedefi</div>
+            <div class="section-sub">Hedef ve tahmini tur sayısını gir; tamamladıkça ilerlemeni gör.</div>
+          </div>
+          <button class="reset-day-btn" onclick="resetDayTasks()">Günü Temizle</button>
+        </div>
 
-      <div class="controls">
-        <button class="btn-main" id="startBtn" onclick="toggleTimer()">Başlat</button>
-        <button class="btn-secondary" onclick="resetTimer()">Sıfırla</button>
+        <div class="progress-wrap">
+          <div class="progress-meta">
+            <span>Günlük Hedef Tamamlama</span>
+            <strong id="progressPercent">0%</strong>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <div class="task-input-row">
+          <input type="text" id="taskInput" placeholder="Kritik bir hedef yaz..." maxlength="65">
+          <input type="number" id="taskEstTours" placeholder="Tur" min="1" max="12" value="1" title="Tahmini odak turu">
+          <button class="btn-ghost-accent" onclick="addTask()">Ekle</button>
+        </div>
+
+        <ul class="item-list" id="taskList"></ul>
       </div>
 
-      <div class="custom-time">
-        <input type="number" id="customMinutes" placeholder="Özel süre (dk, örn: 40)" min="1" max="180">
-        <button class="btn-ghost-accent" onclick="applyCustomTime()">Uygula</button>
+      <div class="card">
+        <div class="section-header" style="margin-bottom: 10px;">
+          <div>
+            <div class="section-title">Başlangıç Ritüeli</div>
+            <div class="section-sub">Oturuma girmeden önce hızlı kontrol.</div>
+          </div>
+          <button class="small-btn" onclick="resetRitual()">Sıfırla</button>
+        </div>
+        <div class="ritual-list" id="ritualList"></div>
       </div>
     </div>
 
-    <div class="card">
-      <div class="section-header">
-        <div>
-          <div class="section-title">Günün En Önemli 3 Hedefi</div>
-          <div class="section-sub">Bugün bitirildiğinde günü başarılı sayacağın üç iş.</div>
+    <!-- SEKME 2: HAFTALIK ÇALIŞMA PROGRAMI -->
+    <div class="tab-panel" id="scheduleTab">
+      <div class="card">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Haftalık Çalışma Programı</div>
+            <div class="section-sub">Gün seç, saat aralığı ve konu/ders bloğu ekle.</div>
+          </div>
         </div>
-        <button class="reset-day-btn" onclick="resetDayTasks()">Günü Temizle</button>
-      </div>
 
-      <div class="task-input-row">
-        <input type="text" id="taskInput" placeholder="Kritik bir hedef yaz..." maxlength="65">
-        <button class="btn-ghost-accent" onclick="addTask()">Ekle</button>
-      </div>
+        <div class="day-selector" id="scheduleDaySelector"></div>
 
-      <ul class="task-list" id="taskList"></ul>
+        <div class="schedule-form">
+          <input type="text" id="schedTime" placeholder="18:00-19:30" maxlength="16">
+          <input type="text" id="schedTopic" placeholder="Konu veya çalışma bloğu..." maxlength="70">
+          <button class="btn-ghost-accent" onclick="addScheduleBlock()">Ekle</button>
+        </div>
+
+        <ul class="item-list" id="scheduleList"></ul>
+      </div>
     </div>
 
-    <footer>Yerel tarayıcı hafızası kullanır &bull; Reklamsız &bull; Ücretsiz</footer>
+    <!-- SEKME 3: HAFTALIK HATIRLATICILAR -->
+    <div class="tab-panel" id="remindersTab">
+      <div class="card">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Haftalık Hatırlatıcılar</div>
+            <div class="section-sub">Seçtiğin gün ve saatte (sayfa açıkken) ekran uyarısı ve ses verir.</div>
+          </div>
+        </div>
+
+        <div class="reminder-form">
+          <input type="text" id="remTitle" placeholder="Hatırlatıcı metni (ör: Deneme analizi)" maxlength="70">
+          <input type="time" id="remTime" value="19:00">
+          <button class="btn-ghost-accent" onclick="addReminder()">Ekle</button>
+        </div>
+
+        <div class="reminder-subrow">
+          <select id="remDay">
+            <option value="1">Pazartesi</option>
+            <option value="2">Salı</option>
+            <option value="3">Çarşamba</option>
+            <option value="4">Perşembe</option>
+            <option value="5">Cuma</option>
+            <option value="6">Cumartesi</option>
+            <option value="0">Pazar</option>
+          </select>
+          <select id="remRepeat">
+            <option value="weekly">Her Hafta Tekrarla</option>
+            <option value="once">Tek Seferlik</option>
+          </select>
+        </div>
+
+        <ul class="item-list" id="reminderList"></ul>
+      </div>
+    </div>
+
+    <!-- SEKME 4: NOTLAR & VERİ YEDEKLEME -->
+    <div class="tab-panel" id="notesTab">
+      <div class="card">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Çalışma Notları / Beyin Boşaltma</div>
+            <div class="section-sub">Aklına gelen önemli noktaları buraya yaz, otomatik saklanır.</div>
+          </div>
+        </div>
+        <textarea id="brainDumpInput" placeholder="Önemli notlar, formüller, yarın hatırlanacak fikirler..."></textarea>
+        <div class="status-note" id="noteSavedStatus"></div>
+      </div>
+
+      <div class="card">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Veri Yedekleme ve Geri Yükleme</div>
+            <div class="section-sub">Tüm program, hatırlatıcı, hedef ve istatistiklerini kopyala veya geri yükle.</div>
+          </div>
+        </div>
+        <textarea id="backupArea" placeholder="Yedek metni burada görünür veya yapıştırıp geri yükleyebilirsin..."></textarea>
+        <div class="button-row">
+          <button class="btn-ghost-accent" onclick="exportBackup()">Yedeği Oluştur &amp; Kopyala</button>
+          <button class="btn-secondary" style="flex: 0 0 auto; padding: 9px 14px;" onclick="importBackup()">Yedekten Geri Yükle</button>
+          <button class="reset-day-btn" onclick="resetAllStats()">İstatistikleri Sıfırla</button>
+        </div>
+        <div class="status-note" id="backupStatus"></div>
+      </div>
+    </div>
+
+    <footer>Yerel tarayıcı hafızası &bull; Reklamsız &bull; Ücretsiz</footer>
   </div>
 
   <script>
+    const DAYS = [
+      { id: 1, short: "Pzt", name: "Pazartesi" },
+      { id: 2, short: "Sal", name: "Salı" },
+      { id: 3, short: "Çar", name: "Çarşamba" },
+      { id: 4, short: "Per", name: "Perşembe" },
+      { id: 5, short: "Cum", name: "Cuma" },
+      { id: 6, short: "Cmt", name: "Cumartesi" },
+      { id: 0, short: "Paz", name: "Pazar" }
+    ];
+
+    const DEFAULT_RITUALS = [
+      "Telefonu sessize al veya uzaklaştır",
+      "Çalışma alanını sadeleştir",
+      "Şu anki ana hedefi netleştir"
+    ];
+
+    // Zamanlayıcı ve istatistik durumları
     let defaultMinutes = 25;
-    let currentModeType = "focus"; // "focus" veya "break"
+    let currentModeType = "focus";
     let timeLeft = defaultMinutes * 60;
     let timerInterval = null;
     let isRunning = false;
 
     let sessions = parseInt(localStorage.getItem("odak_sessions")) || 0;
     let totalMinutes = parseInt(localStorage.getItem("odak_total_minutes")) || 0;
+    let ratings = JSON.parse(localStorage.getItem("odak_ratings")) || [];
     let tasks = JSON.parse(localStorage.getItem("odak_tasks")) || [];
     let activeTaskIndex = localStorage.getItem("odak_active_task");
     activeTaskIndex = activeTaskIndex !== null ? parseInt(activeTaskIndex) : null;
 
+    let ritualState = JSON.parse(localStorage.getItem("odak_ritual")) || [false, false, false];
+    let schedule = JSON.parse(localStorage.getItem("odak_schedule")) || {
+      1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 0: []
+    };
+    let selectedScheduleDay = new Date().getDay();
+
+    let reminders = JSON.parse(localStorage.getItem("odak_reminders")) || [];
+    let firedReminderKeys = JSON.parse(localStorage.getItem("odak_fired_reminders")) || [];
+    let brainDump = localStorage.getItem("odak_brain_dump") || "";
+
+    // DOM referansları
     const timerEl = document.getElementById("timer");
     const startBtn = document.getElementById("startBtn");
     const sessionCountEl = document.getElementById("sessionCount");
     const totalMinutesEl = document.getElementById("totalMinutes");
+    const avgRatingEl = document.getElementById("avgRating");
     const taskListEl = document.getElementById("taskList");
     const taskInputEl = document.getElementById("taskInput");
+    const taskEstToursEl = document.getElementById("taskEstTours");
     const activeFocusTextEl = document.getElementById("activeFocusText");
     const clearFocusBtnEl = document.getElementById("clearFocusBtn");
+    const ratingBoxEl = document.getElementById("ratingBox");
+    const progressPercentEl = document.getElementById("progressPercent");
+    const progressFillEl = document.getElementById("progressFill");
+    const ritualListEl = document.getElementById("ritualList");
+    const scheduleDaySelectorEl = document.getElementById("scheduleDaySelector");
+    const scheduleListEl = document.getElementById("scheduleList");
+    const reminderListEl = document.getElementById("reminderList");
+    const reminderAlertBannerEl = document.getElementById("reminderAlertBanner");
+    const reminderAlertTextEl = document.getElementById("reminderAlertText");
+    const brainDumpInputEl = document.getElementById("brainDumpInput");
+    const noteSavedStatusEl = document.getElementById("noteSavedStatus");
+    const backupAreaEl = document.getElementById("backupArea");
+    const backupStatusEl = document.getElementById("backupStatus");
 
+    // Başlangıç çizimleri
     renderStats();
     renderActiveTaskBanner();
     renderTasks();
+    renderRitual();
+    renderDaySelector();
+    renderSchedule();
+    renderReminders();
+    brainDumpInputEl.value = brainDump;
+    checkReminders();
+    setInterval(checkReminders, 20000);
+
+    function switchTab(tabId, btn) {
+      document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+      document.querySelectorAll(".nav-tab").forEach(b => b.classList.remove("active"));
+      document.getElementById(tabId).classList.add("active");
+      if (btn) btn.classList.add("active");
+    }
 
     function renderStats() {
       sessionCountEl.textContent = sessions;
       totalMinutesEl.textContent = `${totalMinutes} dk`;
+      if (ratings.length > 0) {
+        const sum = ratings.reduce((a, b) => a + b, 0);
+        avgRatingEl.textContent = (sum / ratings.length).toFixed(1);
+      } else {
+        avgRatingEl.textContent = "-";
+      }
     }
 
     function updateDisplay() {
@@ -539,11 +990,8 @@
     }
 
     function toggleTimer() {
-      if (isRunning) {
-        pauseTimer();
-      } else {
-        startTimer();
-      }
+      if (isRunning) pauseTimer();
+      else startTimer();
     }
 
     function startTimer() {
@@ -556,15 +1004,21 @@
           updateDisplay();
         } else {
           pauseTimer();
-          playBeep();
+          playSound(620, 450);
           if (currentModeType === "focus") {
             sessions++;
             totalMinutes += defaultMinutes;
             localStorage.setItem("odak_sessions", sessions);
             localStorage.setItem("odak_total_minutes", totalMinutes);
+            if (activeTaskIndex !== null && tasks[activeTaskIndex]) {
+              tasks[activeTaskIndex].doneTours = (tasks[activeTaskIndex].doneTours || 0) + 1;
+              localStorage.setItem("odak_tasks", JSON.stringify(tasks));
+              renderTasks();
+            }
             renderStats();
+            ratingBoxEl.classList.add("visible");
           }
-          alert(currentModeType === "focus" ? "Odak süresi doldu. Kısa bir mola verebilirsin." : "Mola bitti. Yeni tura hazırsın.");
+          alert(currentModeType === "focus" ? "Odak süresi tamamlandı. Seansı puanlayıp kısa bir mola verebilirsin." : "Mola bitti. Yeni tura geçebilirsin.");
           resetTimer();
         }
       }, 1000);
@@ -582,29 +1036,38 @@
       updateDisplay();
     }
 
-    function playBeep() {
+    function saveRating(score) {
+      ratings.push(score);
+      localStorage.setItem("odak_ratings", JSON.stringify(ratings));
+      ratingBoxEl.classList.remove("visible");
+      renderStats();
+    }
+
+    function playSound(freq, durationMs) {
       try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = "sine";
-        osc.frequency.value = 520;
-        gain.gain.value = 0.16;
+        osc.frequency.value = freq;
+        gain.gain.value = 0.18;
         osc.connect(gain);
         gain.connect(ctx.destination);
         osc.start();
-        setTimeout(() => osc.stop(), 400);
+        setTimeout(() => osc.stop(), durationMs);
       } catch (e) {}
     }
 
+    // Hedefler
     function addTask() {
       const text = taskInputEl.value.trim();
+      const estTours = Math.max(1, Math.min(12, parseInt(taskEstToursEl.value) || 1));
       if (!text) return;
       if (tasks.length >= 3) {
-        alert("Günde en fazla 3 kritik hedef belirleyebilirsin. Önce mevcut hedeflerden birini kaldır.");
+        alert("Günde en fazla 3 kritik hedef belirleyebilirsin.");
         return;
       }
-      tasks.push({ text, done: false });
+      tasks.push({ text, done: false, estTours, doneTours: 0 });
       if (activeTaskIndex === null) {
         activeTaskIndex = tasks.length - 1;
         localStorage.setItem("odak_active_task", activeTaskIndex);
@@ -612,15 +1075,13 @@
       saveAndRenderTasks();
       renderActiveTaskBanner();
       taskInputEl.value = "";
+      taskEstToursEl.value = "1";
     }
 
     function setActiveTask(index) {
       activeTaskIndex = activeTaskIndex === index ? null : index;
-      if (activeTaskIndex === null) {
-        localStorage.removeItem("odak_active_task");
-      } else {
-        localStorage.setItem("odak_active_task", activeTaskIndex);
-      }
+      if (activeTaskIndex === null) localStorage.removeItem("odak_active_task");
+      else localStorage.setItem("odak_active_task", activeTaskIndex);
       renderActiveTaskBanner();
       renderTasks();
     }
@@ -651,11 +1112,8 @@
 
     function deleteTask(index) {
       tasks.splice(index, 1);
-      if (activeTaskIndex === index) {
-        activeTaskIndex = null;
-      } else if (activeTaskIndex !== null && index < activeTaskIndex) {
-        activeTaskIndex--;
-      }
+      if (activeTaskIndex === index) activeTaskIndex = null;
+      else if (activeTaskIndex !== null && index < activeTaskIndex) activeTaskIndex--;
       saveAndRenderTasks();
       renderActiveTaskBanner();
     }
@@ -669,6 +1127,18 @@
       renderActiveTaskBanner();
     }
 
+    function updateTaskProgress() {
+      if (!tasks.length) {
+        progressPercentEl.textContent = "0%";
+        progressFillEl.style.width = "0%";
+        return;
+      }
+      const doneCount = tasks.filter(t => t.done).length;
+      const pct = Math.round((doneCount / tasks.length) * 100);
+      progressPercentEl.textContent = `${pct}% (${doneCount}/${tasks.length})`;
+      progressFillEl.style.width = `${pct}%`;
+    }
+
     function saveAndRenderTasks() {
       localStorage.setItem("odak_tasks", JSON.stringify(tasks));
       renderTasks();
@@ -679,19 +1149,287 @@
       tasks.forEach((task, index) => {
         const isPinned = activeTaskIndex === index;
         const li = document.createElement("li");
-        li.className = `task-item ${task.done ? "done" : ""} ${isPinned ? "is-active-target" : ""}`;
+        li.className = `list-card ${task.done ? "done" : ""} ${isPinned ? "is-active-target" : ""}`;
         li.innerHTML = `
           <div class="task-left" onclick="toggleTask(${index})">
             <div class="check-box">${task.done ? "✓" : ""}</div>
-            <span class="task-text">${escapeHtml(task.text)}</span>
+            <div>
+              <div class="task-title">${escapeHtml(task.text)}</div>
+              <div class="task-meta">Tur: ${task.doneTours || 0} / ${task.estTours || 1}</div>
+            </div>
           </div>
-          <div class="task-actions">
+          <div class="card-actions">
             <button class="pin-btn ${isPinned ? "pinned" : ""}" onclick="setActiveTask(${index})">${isPinned ? "Odakta" : "Odakla"}</button>
             <button class="delete-btn" onclick="deleteTask(${index})" title="Sil">&times;</button>
           </div>
         `;
         taskListEl.appendChild(li);
       });
+      updateTaskProgress();
+    }
+
+    // Ritüel kontrolü
+    function renderRitual() {
+      ritualListEl.innerHTML = "";
+      DEFAULT_RITUALS.forEach((label, idx) => {
+        const checked = !!ritualState[idx];
+        const div = document.createElement("div");
+        div.className = `ritual-item ${checked ? "checked" : ""}`;
+        div.onclick = () => {
+          ritualState[idx] = !ritualState[idx];
+          localStorage.setItem("odak_ritual", JSON.stringify(ritualState));
+          renderRitual();
+        };
+        div.innerHTML = `<span>${checked ? "☑" : "☐"}</span><span>${escapeHtml(label)}</span>`;
+        ritualListEl.appendChild(div);
+      });
+    }
+
+    function resetRitual() {
+      ritualState = [false, false, false];
+      localStorage.setItem("odak_ritual", JSON.stringify(ritualState));
+      renderRitual();
+    }
+
+    // Haftalık Çalışma Programı
+    function renderDaySelector() {
+      scheduleDaySelectorEl.innerHTML = "";
+      DAYS.forEach(day => {
+        const btn = document.createElement("button");
+        btn.className = `day-btn ${selectedScheduleDay === day.id ? "active" : ""}`;
+        btn.textContent = day.short;
+        btn.onclick = () => {
+          selectedScheduleDay = day.id;
+          renderDaySelector();
+          renderSchedule();
+        };
+        scheduleDaySelectorEl.appendChild(btn);
+      });
+    }
+
+    function addScheduleBlock() {
+      const timeVal = document.getElementById("schedTime").value.trim() || "Esnek";
+      const topicVal = document.getElementById("schedTopic").value.trim();
+      if (!topicVal) return;
+      if (!schedule[selectedScheduleDay]) schedule[selectedScheduleDay] = [];
+      schedule[selectedScheduleDay].push({ time: timeVal, topic: topicVal });
+      localStorage.setItem("odak_schedule", JSON.stringify(schedule));
+      document.getElementById("schedTime").value = "";
+      document.getElementById("schedTopic").value = "";
+      renderSchedule();
+    }
+
+    function deleteScheduleBlock(index) {
+      schedule[selectedScheduleDay].splice(index, 1);
+      localStorage.setItem("odak_schedule", JSON.stringify(schedule));
+      renderSchedule();
+    }
+
+    function renderSchedule() {
+      scheduleListEl.innerHTML = "";
+      const list = schedule[selectedScheduleDay] || [];
+      if (!list.length) {
+        scheduleListEl.innerHTML = `<li class="list-card"><span class="task-meta">Bu gün için henüz çalışma bloğu eklenmedi.</span></li>`;
+        return;
+      }
+      list.forEach((item, idx) => {
+        const li = document.createElement("li");
+        li.className = "list-card";
+        li.innerHTML = `
+          <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;">
+            <span class="badge-time">${escapeHtml(item.time)}</span>
+            <span class="task-title">${escapeHtml(item.topic)}</span>
+          </div>
+          <button class="delete-btn" onclick="deleteScheduleBlock(${idx})" title="Sil">&times;</button>
+        `;
+        scheduleListEl.appendChild(li);
+      });
+    }
+
+    // Haftalık Hatırlatıcılar
+    function addReminder() {
+      const title = document.getElementById("remTitle").value.trim();
+      const time = document.getElementById("remTime").value;
+      const day = parseInt(document.getElementById("remDay").value, 10);
+      const repeat = document.getElementById("remRepeat").value;
+      if (!title || !time) return;
+
+      reminders.push({
+        id: Date.now().toString(),
+        title,
+        time,
+        day,
+        repeat,
+        enabled: true
+      });
+      localStorage.setItem("odak_reminders", JSON.stringify(reminders));
+      document.getElementById("remTitle").value = "";
+      renderReminders();
+    }
+
+    function toggleReminder(id) {
+      const r = reminders.find(item => item.id === id);
+      if (r) {
+        r.enabled = !r.enabled;
+        localStorage.setItem("odak_reminders", JSON.stringify(reminders));
+        renderReminders();
+      }
+    }
+
+    function deleteReminder(id) {
+      reminders = reminders.filter(item => item.id !== id);
+      localStorage.setItem("odak_reminders", JSON.stringify(reminders));
+      renderReminders();
+    }
+
+    function getDayName(dayId) {
+      const found = DAYS.find(d => d.id === dayId);
+      return found ? found.name : "";
+    }
+
+    function renderReminders() {
+      reminderListEl.innerHTML = "";
+      if (!reminders.length) {
+        reminderListEl.innerHTML = `<li class="list-card"><span class="task-meta">Henüz hatırlatıcı eklenmedi.</span></li>`;
+        return;
+      }
+      reminders.forEach(r => {
+        const li = document.createElement("li");
+        li.className = `list-card ${!r.enabled ? "done" : ""}`;
+        li.innerHTML = `
+          <div style="flex:1; min-width:0;">
+            <div class="task-title">${escapeHtml(r.title)}</div>
+            <div class="task-meta">${getDayName(r.day)} &bull; ${escapeHtml(r.time)} &bull; ${r.repeat === "weekly" ? "Haftalık" : "Tek seferlik"}</div>
+          </div>
+          <div class="card-actions">
+            <button class="pin-btn ${r.enabled ? "pinned" : ""}" onclick="toggleReminder('${r.id}')">${r.enabled ? "Açık" : "Kapalı"}</button>
+            <button class="delete-btn" onclick="deleteReminder('${r.id}')" title="Sil">&times;</button>
+          </div>
+        `;
+        reminderListEl.appendChild(li);
+      });
+    }
+
+    function checkReminders() {
+      const now = new Date();
+      const day = now.getDay();
+      const hh = String(now.getHours()).padStart(2, "0");
+      const mm = String(now.getMinutes()).padStart(2, "0");
+      const currentHM = `${hh}:${mm}`;
+      const dateStamp = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+
+      let changed = false;
+      reminders.forEach(r => {
+        if (!r.enabled) return;
+        if (r.day === day && r.time === currentHM) {
+          const fireKey = `${r.id}_${dateStamp}_${currentHM}`;
+          if (!firedReminderKeys.includes(fireKey)) {
+            firedReminderKeys.push(fireKey);
+            changed = true;
+            triggerReminderAlert(r);
+            if (r.repeat === "once") {
+              r.enabled = false;
+              localStorage.setItem("odak_reminders", JSON.stringify(reminders));
+              renderReminders();
+            }
+          }
+        }
+      });
+
+      if (changed) {
+        if (firedReminderKeys.length > 100) firedReminderKeys = firedReminderKeys.slice(-100);
+        localStorage.setItem("odak_fired_reminders", JSON.stringify(firedReminderKeys));
+      }
+    }
+
+    function triggerReminderAlert(r) {
+      playSound(740, 500);
+      reminderAlertTextEl.textContent = `${r.time} — ${r.title}`;
+      reminderAlertBannerEl.classList.add("visible");
+      if ("Notification" in window && Notification.permission === "granted") {
+        new Notification("ODAK Hatırlatıcı", { body: `${r.time} - ${r.title}` });
+      }
+    }
+
+    function dismissReminderAlert() {
+      reminderAlertBannerEl.classList.remove("visible");
+    }
+
+    // Notlar ve Yedekleme
+    brainDumpInputEl.addEventListener("input", () => {
+      brainDump = brainDumpInputEl.value;
+      localStorage.setItem("odak_brain_dump", brainDump);
+      noteSavedStatusEl.textContent = "Not kaydedildi.";
+    });
+
+    function exportBackup() {
+      const payload = {
+        sessions,
+        totalMinutes,
+        ratings,
+        tasks,
+        ritualState,
+        schedule,
+        reminders,
+        brainDump
+      };
+      const jsonStr = JSON.stringify(payload, null, 2);
+      backupAreaEl.value = jsonStr;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(jsonStr).catch(() => {});
+      }
+      backupStatusEl.textContent = "Yedek oluşturuldu ve panoya kopyalandı.";
+    }
+
+    function importBackup() {
+      try {
+        const raw = backupAreaEl.value.trim();
+        if (!raw) return;
+        const data = JSON.parse(raw);
+
+        sessions = parseInt(data.sessions, 10) || 0;
+        totalMinutes = parseInt(data.totalMinutes, 10) || 0;
+        ratings = Array.isArray(data.ratings) ? data.ratings : [];
+        tasks = Array.isArray(data.tasks) ? data.tasks.slice(0, 3) : [];
+        ritualState = Array.isArray(data.ritualState) ? data.ritualState : [false, false, false];
+        schedule = data.schedule && typeof data.schedule === "object" ? data.schedule : { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 0: [] };
+        reminders = Array.isArray(data.reminders) ? data.reminders : [];
+        brainDump = typeof data.brainDump === "string" ? data.brainDump : "";
+        activeTaskIndex = tasks.length > 0 ? 0 : null;
+
+        localStorage.setItem("odak_sessions", sessions);
+        localStorage.setItem("odak_total_minutes", totalMinutes);
+        localStorage.setItem("odak_ratings", JSON.stringify(ratings));
+        localStorage.setItem("odak_tasks", JSON.stringify(tasks));
+        localStorage.setItem("odak_ritual", JSON.stringify(ritualState));
+        localStorage.setItem("odak_schedule", JSON.stringify(schedule));
+        localStorage.setItem("odak_reminders", JSON.stringify(reminders));
+        localStorage.setItem("odak_brain_dump", brainDump);
+        if (activeTaskIndex !== null) localStorage.setItem("odak_active_task", activeTaskIndex);
+        else localStorage.removeItem("odak_active_task");
+
+        brainDumpInputEl.value = brainDump;
+        renderStats();
+        renderActiveTaskBanner();
+        renderTasks();
+        renderRitual();
+        renderSchedule();
+        renderReminders();
+        backupStatusEl.textContent = "Yedek başarıyla geri yüklendi.";
+      } catch (e) {
+        backupStatusEl.textContent = "Geçersiz yedek formatı.";
+      }
+    }
+
+    function resetAllStats() {
+      sessions = 0;
+      totalMinutes = 0;
+      ratings = [];
+      localStorage.setItem("odak_sessions", "0");
+      localStorage.setItem("odak_total_minutes", "0");
+      localStorage.setItem("odak_ratings", "[]");
+      renderStats();
+      backupStatusEl.textContent = "Odak istatistikleri sıfırlandı.";
     }
 
     function escapeHtml(str) {
