@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ODAK | Günlük Tempo & Çalışma Merkezi</title>
+  <style>
+    :root {
+      --bg: #0b0e14;
+      --card: #131822;
+      --border: #1f2736;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0ea5e9;
+      --success: #22c55e;
+      --danger: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--accent);
+    }
+
+    .stats-badge {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .stats-badge span {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .mode-buttons {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .mode-btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .mode-btn.active {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .timer-display {
+      font-size: 4.2rem;
+      font-weight: 800;
+      text-align: center;
+      letter-spacing: 2px;
+      margin: 12px 0 22px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-main {
+      flex: 2;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: var(--accent);
+      color: #06101a;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-main:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      flex: 1;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: transparent;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .custom-time {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .custom-time input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .custom-time button {
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--accent);
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .section-sub {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .task-input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .task-input-row input {
+      flex: 1;
+      padding: 11px 13px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .task-input-row button {
+      padding: 11px 16px;
+      border: none;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #06101a;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .task-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .task-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      gap: 10px;
+    }
+
+    .task-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      cursor: pointer;
+    }
+
+    .check-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .task-item.done .check-circle {
+      background: var(--success);
+      border-color: var(--success);
+    }
+
+    .task-item.done .task-text {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    .delete-btn {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 2px 6px;
+    }
+
+    .delete-btn:hover {
+      color: var(--danger);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">ODAK // TEMPO</div>
+      <div class="stats-badge">Tamamlanan: <span id="sessionCount">0</span> tur</div>
+    </header>
+
+    <div class="card">
+      <div class="mode-buttons">
+        <button class="mode-btn active" onclick="setMode(25, this)">Odak (25 dk)</button>
+        <button class="mode-btn" onclick="setMode(5, this)">Kısa Mola (5 dk)</button>
+        <button class="mode-btn" onclick="setMode(15, this)">Uzun Mola (15 dk)</button>
+      </div>
+
+      <div class="timer-display" id="timer">25:00</div>
+
+      <div class="controls">
+        <button class="btn-main" id="startBtn" onclick="toggleTimer()">Başlat</button>
+        <button class="btn-secondary" onclick="resetTimer()">Sıfırla</button>
+      </div>
+
+      <div class="custom-time">
+        <input type="number" id="customMinutes" placeholder="Özel dakika gir (örn: 40)" min="1" max="180">
+        <button onclick="applyCustomTime()">Ayarla</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Günün En Önemli 3 Hedefi</div>
+      <div class="section-sub">Kafanı dağıtma, bugün sadece en kritik 3 işe odaklan.</div>
+
+      <div class="task-input-row">
+        <input type="text" id="taskInput" placeholder="Bugün neyi bitireceksin?" maxlength="60">
+        <button onclick="addTask()">Ekle</button>
+      </div>
+
+      <ul class="task-list" id="taskList"></ul>
+    </div>
+
+    <footer>Reklamsız &bull; Ücretsiz &bull; Sade Odak Aracı</footer>
+  </div>
+
+  <script>
+    let defaultMinutes = 25;
+    let timeLeft = defaultMinutes * 60;
+    let timerInterval = null;
+    let isRunning = false;
+
+    let sessions = parseInt(localStorage.getItem("odak_sessions")) || 0;
+    let tasks = JSON.parse(localStorage.getItem("odak_tasks")) || [];
+
+    const timerEl = document.getElementById("timer");
+    const startBtn = document.getElementById("startBtn");
+    const sessionCountEl = document.getElementById("sessionCount");
+    const taskListEl = document.getElementById("taskList");
+    const taskInputEl = document.getElementById("taskInput");
+
+    sessionCountEl.textContent = sessions;
+    renderTasks();
+
+    function updateDisplay() {
+      const mins = Math.floor(timeLeft / 60);
+      const secs = timeLeft % 60;
+      const formatted = `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+      timerEl.textContent = formatted;
+      document.title = `${formatted} - ODAK`;
+    }
+
+    function setMode(minutes, btn) {
+      pauseTimer();
+      defaultMinutes = minutes;
+      timeLeft = minutes * 60;
+      updateDisplay();
+      document.querySelectorAll(".mode-btn").forEach(b => b.classList.remove("active"));
+      if (btn) btn.classList.add("active");
+    }
+
+    function applyCustomTime() {
+      const val = parseInt(document.getElementById("customMinutes").value);
+      if (val && val > 0 && val <= 180) {
+        setMode(val, null);
+        document.getElementById("customMinutes").value = "";
+      }
+    }
+
+    function toggleTimer() {
+      if (isRunning) {
+        pauseTimer();
+      } else {
+        startTimer();
+      }
+    }
+
+    function startTimer() {
+      if (isRunning) return;
+      isRunning = true;
+      startBtn.textContent = "Duraklat";
+      timerInterval = setInterval(() => {
+        if (timeLeft > 0) {
+          timeLeft--;
+          updateDisplay();
+        } else {
+          pauseTimer();
+          playBeep();
+          sessions++;
+          localStorage.setItem("odak_sessions", sessions);
+          sessionCountEl.textContent = sessions;
+          alert("Süre tamamlandı! Harika iş çıkardın.");
+          resetTimer();
+        }
+      }, 1000);
+    }
+
+    function pauseTimer() {
+      isRunning = false;
+      clearInterval(timerInterval);
+      startBtn.textContent = "Başlat";
+    }
+
+    function resetTimer() {
+      pauseTimer();
+      timeLeft = defaultMinutes * 60;
+      updateDisplay();
+    }
+
+    function playBeep() {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.value = 580;
+        gain.gain.value = 0.2;
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        setTimeout(() => osc.stop(), 450);
+      } catch (e) {}
+    }
+
+    function addTask() {
+      const text = taskInputEl.value.trim();
+      if (!text) return;
+      if (tasks.length >= 3) {
+        alert("Günde en fazla 3 kritik hedef ekleyebilirsin. Önce birini tamamla veya sil!");
+        return;
+      }
+      tasks.push({ text, done: false });
+      saveAndRenderTasks();
+      taskInputEl.value = "";
+    }
+
+    function toggleTask(index) {
+      tasks[index].done = !tasks[index].done;
+      saveAndRenderTasks();
+    }
+
+    function deleteTask(index) {
+      tasks.splice(index, 1);
+      saveAndRenderTasks();
+    }
+
+    function saveAndRenderTasks() {
+      localStorage.setItem("odak_tasks", JSON.stringify(tasks));
+      renderTasks();
+    }
+
+    function renderTasks() {
+      taskListEl.innerHTML = "";
+      tasks.forEach((task, index) => {
+        const li = document.createElement("li");
+        li.className = `task-item ${task.done ? "done" : ""}`;
+        li.innerHTML = `
+          <div class="task-left" onclick="toggleTask(${index})">
+            <div class="check-circle">${task.done ? "✓" : ""}</div>
+            <span class="task-text">${escapeHtml(task.text)}</span>
+          </div>
+          <button class="delete-btn" onclick="deleteTask(${index})">&times;</button>
+        `;
+        taskListEl.appendChild(li);
+      });
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement("div");
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    taskInputEl.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") addTask();
+    });
+  </script>
+</body>
+</html>
